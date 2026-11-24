@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>for monaco</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            min-height: 100vh;
+            background: linear-gradient(135deg, #100b20, #40132e, #180d29);
+            font-family: Georgia, serif;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            padding: 30px 10px;
+        }
+        /* GLOWING BACKGROUND*/
+        body::before{
+            content: "";
+            position: fixed;
+            width: 350px;
+            height: 350px;
+            background: #e72c8b;
+            filter: blur(130px);
+            opacity: .3;
+            top: 5%;
+            left: 10%;
+            animation: glow 5s infinite alternate;
+            pointer-events: none;
+        }
+        body::after{
+            content: "";
+            position: fixed;
+            width: 350px;
+            height: 350px;
+            background: #8430dc;
+            filter: blur(130px);
+            opacity: .3;
+            top: 5%;
+            left: 10%;
+            animation: glow 6s infinite alternate;
+            pointer-events: none;
+        }
+        @keyframes glow {
+            to {
+                transform: scale(1.4);
+            }
+        }
+        /* MAIN CONTAINER*/
+        .container {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            padding: 20px;
+        }
+
+        .subtitle {
+            font-size: 12px;
+            letter-spacing: 5px;
+            color: #f5a8c8;
+            text-transform: uppercase;
+        }
+        h1 {
+    color: #ffc3dc;
+    font-size: clamp(30px, 6vw, 45px);
+    margin: 15px 0;
+    text-shadow: 0 0 20px #ff70a6;
+}
+
+/* BOUQUET */
+
+.bouquet {
+    position: relative;
+    width: 350px;
+    height: 390px;
+    max-width: 95vw;
+    margin: auto;
+}
+
+/* FLOWERS */
+
+.flower {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    animation: sway 3s infinite ease-in-out;
+    z-index: 3;
+}
+
+.f1 {
+    top: 20px;
+    left: 125px;
+}
+
+.f2 {
+    top: 80px;
+    left: 30px;
+    animation-delay: .5s;
+}
+
+.f3 {
+    top: 80px;
+    right: 30px;
+    animation-delay: 1s;
+}
+
+.f4 {
+    top: 160px;
+    left: 75px;
+    animation-delay: .8s;
+}
+
+.f5 {
+    top: 160px;
+    right: 75px;
+    animation-delay: 1.2s;
+}
+
+/* PETALS */
+
+.petal {
+    position: absolute;
+    width: 35px;
+    height: 50px;
+    background: #ff5c93;
+    border-radius: 50%;
+    top: 0;
+    left: 32px;
+    transform-origin: 50% 50px;
+}
+
+.petal:nth-child(1) { transform: rotate(0deg); }
+.petal:nth-child(2) { transform: rotate(45deg); }
+.petal:nth-child(3) { transform: rotate(90deg); }
+.petal:nth-child(4) { transform: rotate(135deg); }
+.petal:nth-child(5) { transform: rotate(180deg); }
+.petal:nth-child(6) { transform: rotate(225deg); }
+.petal:nth-child(7) { transform: rotate(270deg); }
+.petal:nth-child(8) { transform: rotate(315deg); }
+
+/* FLOWER COLOURS */
+
+.f2 .petal {
+    background: #c77dff;
+}
+
+.f3 .petal {
+    background: #ffbd59;
+}
+
+.f4 .petal {
+    background: #ff8fab;
+}
+
+.f5 .petal {
+    background: #e879f9;
+}
+
+/* FLOWER CENTRES */
+
+.center {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    background: radial-gradient(circle, #fff2a6, #d99a35);
+    border-radius: 50%;
+    top: 38px;
+    left: 37px;
+    z-index: 4;
+}
+
+/* FLOWER MOVEMENT */
+
+@keyframes sway {
+    0%, 100% {
+        transform: rotate(-5deg);
+    }
+
+    50% {
+        transform: rotate(5deg);
+    }
+}
+
+/* STEMS */
+
+.stem {
+    position: absolute;
+    width: 5px;
+    height: 190px;
+    background: linear-gradient(to right, #315c3d, #80aa62);
+    top: 170px;
+    left: 173px;
+    border-radius: 10px;
+    transform-origin: top;
+    z-index: 1;
+}
+
+.stem1 { transform: rotate(-25deg); }
+.stem2 { transform: rotate(-12deg); }
+.stem3 { transform: rotate(12deg); }
+.stem4 { transform: rotate(25deg); }
+
+/* LEAVES */
+
+.leaf {
+    position: absolute;
+    width: 65px;
+    height: 28px;
+    background: linear-gradient(120deg, #91bd72, #315e42);
+    border-radius: 100% 0 100% 0;
+    z-index: 2;
+}
+
+.leaf1 {
+    top: 235px;
+    left: 85px;
+    transform: rotate(20deg);
+}
+
+.leaf2 {
+    top: 270px;
+    right: 80px;
+    transform: rotate(165deg);
+}
+
+.leaf3 {
+    top: 300px;
+    left: 130px;
+    transform: rotate(15deg);
+}
+
+/* BOUQUET WRAPPING */
+
+.wrapper {
+    position: absolute;
+    width: 190px;
+    height: 110px;
+    background: linear-gradient(120deg, #f5bfd3, #ad4776);
+    bottom: 0;
+    left: 80px;
+    clip-path: polygon(0 0, 100% 0, 70% 100%, 30% 100%);
+    z-index: 4;
+}
+
+/* RIBBON */
+
+.ribbon {
+    position: absolute;
+    bottom: 65px;
+    left: 153px;
+    width: 45px;
+    height: 28px;
+    background: #8e2456;
+    border-radius: 50%;
+    z-index: 5;
+    animation: ribbonMove 2s infinite ease-in-out;
+}
+
+.ribbon::before,
+.ribbon::after {
+    content: "";
+    position: absolute;
+    width: 40px;
+    height: 30px;
+    border: 8px solid #c45b87;
+    border-radius: 80% 10% 80% 10%;
+}
+
+.ribbon::before {
+    right: 30px;
+    transform: rotate(25deg);
+}
+
+.ribbon::after {
+    left: 30px;
+    transform: scaleX(-1) rotate(25deg);
+}
+
+@keyframes ribbonMove {
+    50% {
+        transform: rotate(8deg);
+    }
+}
+
+/* FALLING PETALS */
+
+.falling-petals {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.falling-petals span {
+    position: absolute;
+    top: -40px;
+    width: 15px;
+    height: 20px;
+    background: #ff80ae;
+    border-radius: 100% 0 100% 0;
+    opacity: .7;
+    animation: fall 8s linear infinite;
+}
+
+.falling-petals span:nth-child(1) { left: 5%; }
+.falling-petals span:nth-child(2) { left: 15%; animation-delay: 2s; }
+.falling-petals span:nth-child(3) { left: 25%; animation-delay: 4s; }
+.falling-petals span:nth-child(4) { left: 40%; animation-delay: 1s; }
+.falling-petals span:nth-child(5) { left: 55%; animation-delay: 3s; }
+.falling-petals span:nth-child(6) { left: 70%; animation-delay: 5s; }
+.falling-petals span:nth-child(7) { left: 85%; animation-delay: 2.5s; }
+.falling-petals span:nth-child(8) { left: 95%; animation-delay: 4.5s; }
+
+@keyframes fall {
+    0% {
+        transform: translateY(-50px) rotate(0deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: .8;
+    }
+
+    100% {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+/* SPARKLES */
+
+.sparkle {
+    position: fixed;
+    color: #ffe7a8;
+    animation: twinkle 2s infinite alternate;
+    pointer-events: none;
+}
+
+.s1 { top: 20%; left: 15%; }
+.s2 { top: 35%; right: 15%; animation-delay: 1s; }
+.s3 { bottom: 20%; left: 20%; animation-delay: .5s; }
+.s4 { bottom: 30%; right: 20%; animation-delay: 1.5s; }
+
+@keyframes twinkle {
+    from {
+        opacity: .2;
+        transform: scale(.7);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1.3);
+    }
+}
+
+/* TEXT */
+
+.message {
+    margin-top: 15px;
+    font-size: 21px;
+    color: #ffc6dc;
+}
+
+.small {
+    margin-top: 12px;
+    font-size: 12px;
+    letter-spacing: 3px;
+    color: #e9a6c0;
+}
+
+/* SURPRISE BUTTON */
+
+#surprise {
+    display: none;
+}
+
+.button {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 13px 28px;
+    background: linear-gradient(120deg, #ff6b9d, #bd4385);
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 0 20px #ff5c9370;
+    transition: .3s;
+}
+
+.button:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 30px #ff5c93;
+}
+
+/* HIDDEN LOVE MESSAGE */
+
+.hidden-message {
+    display: none;
+    margin: 25px auto 0;
+    padding: 25px;
+    max-width: 350px;
+    background: #ffffff12;
+    border: 1px solid #ffb6d055;
+    border-radius: 15px;
+    color: #ffe0eb;
+    line-height: 1.8;
+    animation: appear 1s ease;
+}
+
+#surprise:checked ~ .hidden-message {
+    display: block;
+}
+
+#surprise:checked ~ .button {
+    display: none;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* MOBILE RESPONSIVENESS */
+
+@media (max-width: 400px) {
+    .bouquet {
+        transform: scale(.85);
+        transform-origin: top center;
+        margin-bottom: -55px;
+    }
+
+    h1 {
+        font-size: 29px;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <!-- falling flower petals-->
+     <div class="falling-petals">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+     </div>
+     <span class="sparkle s1">✦</span>
+     <span class="sparkle s2">✧</span>
+     <span class="sparkle s3">✦</span>
+     <span class="sparkle s4">✧</span>
+     <div class="container">
+
+        <p class="subtitle"> A little something for you</p>
+
+        <h1>For You, Monaco</h1>
+        <!-- BOUQUET-->
+         <div class="bouquet">
+            <!-- STEMS-->
+
+            <div class="stem stem1"></div>
+            <div class="stem stem2"></div>
+            <div class="stem stem3"></div>
+            <div class="stem stem4"></div>
+            
+            <div class="leaf leaf1"></div>
+            <div class="leaf leaf2"></div>
+            <div class="leaf leaf3"></div>
+          <!-- FLOWER 1 -->
+
+        <div class="flower f1">
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="center"></div>
+        </div>
+          <!-- FLOWER 2 -->
+
+        <div class="flower f2">
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="center"></div>
+        </div> 
+           <!-- FLOWER 3 -->
+
+        <div class="flower f3">
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="center"></div>
+        </div>
+
+        <!-- FLOWER 4 -->
+
+        <div class="flower f4">
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="center"></div>
+        </div>
+
+        <!-- FLOWER 5 -->
+
+        <div class="flower f5">
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="center"></div>
+        </div>
+
+        <!-- WRAPPING -->
+
+        <div class="wrapper"></div>
+        <div class="ribbon"></div>
+
+    </div>
+       <!-- MAIN MESSAGE -->
+
+    <p class="message">
+        Monaco, you make the world a little brighter 
+    </p>
+
+    <p class="small">
+        MADE ESPECIALLY FOR YOU 
+    </p>
+
+    <!-- SURPRISE BUTTON -->
+
+    <input type="checkbox" id="surprise">
+
+    <label for="surprise" class="button">
+        Open your surprise 
+    </label>
+
+    <!-- HIDDEN MESSAGE -->
+
+    <div class="hidden-message">
+
+        <h2>Dear Monaco </h2>
+
+        <br>
+
+        If I could give you all the flowers
+        in the world, I would.
+
+        <br><br>
+
+        But for now, here's a little bouquet
+        made with a little bit of code
+        and a whole lot of thought.
+
+        <br><br>
+
+        May your days be as beautiful
+        as these flowers, and may you
+        always have reasons to smile.
+
+        <br><br>
+
+        You deserve beautiful things,
+        beautiful moments and endless reasons
+        to smile.
+
+        <br><br>
+
+        <strong>With love </strong>
+
+        <br><br>
+
+        <small>— Nelson</small>
+
+    </div>   
+     </div>
+</body>
+</html>
